@@ -3,6 +3,7 @@
 public class Laptop extends Computer { //Laptop inherits from Computer
     String screenSize=null;
 
+    // Balls
     //Constructors
     public Laptop() {} //No-arg constructor
 
