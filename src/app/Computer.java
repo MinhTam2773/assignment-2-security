@@ -1,3 +1,5 @@
+package app;
+
 public final class Computer {
 
     private final String CPU;

@@ -1,35 +1,47 @@
+package app;
+
 //Laptop computer: adds screen size to other Computer info
 
-public class Laptop extends Computer { //Laptop inherits from Computer
-    String screenSize=null;
-
-    // Ligma Balls
-    //Constructors
-    public Laptop() {} //No-arg constructor
-
-    public Laptop(String CPU, String RAM, String disk, String screenSize) {
-        //Inherited from Computer superclass
-        this.CPU=CPU;
-        this.RAM=RAM;
-        this.disk=disk;
-
-        //Only in Laptop subclass
-        this.screenSize=screenSize;
+public class Laptop { //Laptop inherits from Computer
+	private final Computer computer; //compostion
+	private final String screenSize;
+	
+	//constructor
+	public Laptop(String CPU, String RAM, String disk, String screenSize) {
+        this.computer = new Computer(CPU, RAM, disk);
+        this.screenSize = screenSize;
+    }
+	
+	//getters
+	public String getCPU() {
+        return computer.getCPU();
     }
 
-    //Setter
-    public void setScreenSize(String screenSize) {
-        this.screenSize=screenSize;
+    public String getRAM() {
+        return computer.getRAM();
     }
 
-    //Getter
+    public String getDisk() {
+        return computer.getDisk();
+    }
+
     public String getScreenSize() {
-        return this.screenSize;
+        return screenSize;
     }
 
-    //Return formatted version of data
-    public String toString() {
-        return "Type:Laptop\tCPU:" + this.CPU + "\tRAM:" + this.RAM + "\tDisk:" + this.disk + "\tScreen:" + this.screenSize;
+    public Computer getComputer() {
+        return computer;
     }
+    
+    //display format information
+    @Override
+    public String toString() {
+        return "Type:Laptop\tCPU:" + computer.getCPU()
+                + "\tRAM:" + computer.getRAM()
+                + "\tDisk:" + computer.getDisk()
+                + "\tScreen:" + screenSize;
+    }
+
+	
     
 }
