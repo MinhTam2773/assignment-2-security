@@ -1,13 +1,21 @@
 //Manage Computers program: maintains an ArrayList of Computer objects, 
 //can be either Laptop or Desktop, but never just Computer-type objects themselves
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ManageComputers {
-
+	
+	private static final String[] VALID_CPU = {"i3", "i5", "i7", "i9"};
+	private static final String[] VALID_RAM = {"4GB", "8GB", "16GB", "32GB"};
+	private static final String[] VALID_DISK = {"256GB", "512GB", "1TB", "2TB"};
+	private static final String[] VALID_GPU = {"RTX5060", "RTX5070", "RTX5080", "RTX5090"};
+	private static final String[] VALID_SCREEN = {"14\"", "16\"", "18\"", "21\""};
+	
+	
     public static void main(String args[]) {
-
+    	
         //This ArrayList will hold all the computers in the system. Note that the type of objects expected in this
         //ArrayList are Computer, not Laptop or Desktop, but since those are subclasses of Computer they can be
         //stored in an ArrayLiust<Computer> anyway.
@@ -118,8 +126,7 @@ public class ManageComputers {
                 //Get CPU, RAM and Disk info
                 tempComputer = getComputerData(s); 
 
-                System.out.print("Enter screen size:");
-                String screenSize = s.nextLine();
+                String screenSize = promptWhitelisted(s, "Enter screen size", VALID_SCREEN);
 
                 //Add new Laptop to ArrayList in main() method
                 computers.add(new Laptop(tempComputer.getCPU(),tempComputer.getRAM(),tempComputer.getDisk(),screenSize)); 
@@ -132,8 +139,7 @@ public class ManageComputers {
             //Get CPU, RAM and Disk info
                 tempComputer = getComputerData(s); 
 
-                System.out.print("Enter GPU:");
-                String GPUType = s.nextLine();
+                String GPUType = promptWhitelisted(s, "Enter GPU", VALID_GPU);
 
                 //Add new Desktop to ArrayList in main() method
                 computers.add(new Desktop(tempComputer.getCPU(),tempComputer.getRAM(),tempComputer.getDisk(),GPUType)); 
@@ -207,8 +213,7 @@ public class ManageComputers {
                     //Get CPU, RAM and Disk info, store in temporary Computer-type object
                     tempComputer = getComputerData(s); 
 
-                    System.out.print("Enter screen size:");
-                    String screenSize = s.nextLine();
+                    String screenSize = promptWhitelisted(s, "Enter screen size", VALID_SCREEN);
 
                     //Get reference to the object in ArrayList<Computer> to edit
                     //Cast Computer to Laptop for setScreenSize call a few lines of code later
@@ -230,9 +235,8 @@ public class ManageComputers {
                     //Get CPU, RAM and Disk info
                     tempComputer = getComputerData(s); 
 
-                    System.out.print("Enter GPU:");
-                    String GPUType = s.nextLine();
-
+                    String GPUType = promptWhitelisted(s, "Enter GPU", VALID_GPU);
+                    
                     //Get reference to the object in ArrayList<Computer> to edit
                     //Cast Computer to Laptop for setScreenSize call a few lines of code later
                     Desktop desktopToEdit = (Desktop)computers.get(computerListNumberToEdit-1);
@@ -254,6 +258,22 @@ public class ManageComputers {
 
 
     } //End of editComputer
+    
+    // Prompts the user to enter a value and checks it against the whitelist
+    // Keeps looping until a valid value is entered it then returns it.
+    private static String promptWhitelisted(Scanner s, String prompt, String[] whitelist) {
+        while (true) {
+            System.out.print(prompt + " " + Arrays.toString(whitelist) + ": ");
+            String input = s.nextLine().trim();
+            for (String valid : whitelist) {
+                if (valid.equalsIgnoreCase(input)) {
+                    return valid;
+                }
+            }
+            System.out.println("Invalid input: \"" + input + "\" is not allowed.");
+            System.out.println("Valid options are: " + Arrays.toString(whitelist));
+        }
+    }
 
     //-----------------------------
     //Helper method to get data common to Laptop and Desktop (CPU, RAM and disk) objects. Returns a Computer-type object
@@ -263,14 +283,9 @@ public class ManageComputers {
         String RAM="";
         String disk="";
 
-        System.out.print("Enter CPU:");
-        CPU = s.nextLine();
-
-        System.out.print("Enter RAM:");
-        RAM = s.nextLine();
-
-        System.out.print("Enter Disk:");
-        disk = s.nextLine();
+        CPU  = promptWhitelisted(s, "Enter CPU",  VALID_CPU);
+        RAM  = promptWhitelisted(s, "Enter RAM",  VALID_RAM);
+        disk = promptWhitelisted(s, "Enter Disk", VALID_DISK);
 
         return new Computer(CPU,RAM,disk);
 
