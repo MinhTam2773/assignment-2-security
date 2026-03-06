@@ -1,44 +1,27 @@
-//Computer class: manages computer CPU, RAM and Disk information
+public final class Computer {
 
-public class Computer {
-    String CPU=null;
-    String RAM=null;
-    String disk=null;
+    private final String CPU;
+    private final String RAM;
+    private final String disk;
 
-    //Constructors
-    public Computer() {} //No-arg contructor
-
+    // Constructor: all values must and shouldbe provided when creating the object
     public Computer(String CPU, String RAM, String disk) {
-        this.CPU=CPU;
-        this.RAM=RAM;
-        this.disk=disk;
+        this.CPU = CPU;
+        this.RAM = RAM;
+        this.disk = disk;
     }
 
-    //Setters
-    public void setCPU(String CPU) {
-        this.CPU=CPU;
-    }
+    //Alex Notes: removed setters to make the class immutable, values can only be set at construction time
 
-    public void setRAM(String RAM) {
-        this.RAM=RAM;
-    }
-
-    public void setDisk(String disk) {
-        this.disk=disk;
-    }
-
-    //Getters
     public String getCPU() {
-        return this.CPU;
+        return CPU;
     }
 
     public String getRAM() {
-        return this.RAM;
+        return RAM;
     }
 
     public String getDisk() {
-        return this.disk;
+        return disk;
     }
-
-
 }
