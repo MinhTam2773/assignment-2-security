@@ -12,9 +12,9 @@ public class ComputerData implements ComputerInfo {
     }
 
     @Override
-    public String getCpu() { return cpu; }
+    public String getCPU() { return cpu; }
     @Override
-    public String getRam() { return ram; }
+    public String getRAM() { return ram; }
     @Override
     public String getDisk() { return disk; }
 

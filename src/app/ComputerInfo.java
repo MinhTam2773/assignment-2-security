@@ -1,7 +1,7 @@
 package app;
 
 public interface ComputerInfo {
-    String getCpu();
-    String getRam();   // kept as String for consistency (original used String)
+    String getCPU();
+    String getRAM();
     String getDisk();
 }

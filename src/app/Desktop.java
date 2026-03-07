@@ -1,7 +1,8 @@
+package app;
 // Desktop computer: 
 // adds GPU type (now immutable with compositional attributes)
 
-public final class Desktop { // Doesn't inherit from Computer
+public final class Desktop implements ComputerInfo { // Doesn't inherit from Computer
     
 	private final Computer computer;
 	private final String GPUType;

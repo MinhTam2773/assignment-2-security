@@ -2,7 +2,7 @@ package app;
 
 //Laptop computer: adds screen size to other Computer info
 
-public class Laptop { //Laptop dose not inherits from Computer
+public class Laptop implements ComputerInfo { //Laptop dose not inherits from Computer
 	private final Computer computer; //compostion
 	private final String screenSize;
 	
